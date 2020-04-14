@@ -2,6 +2,7 @@ package com.block.project.springboot.web;
 
 import com.block.project.springboot.config.auth.LoginUser;
 import com.block.project.springboot.config.auth.SessionUser;
+import com.block.project.springboot.domain.user.User;
 import com.block.project.springboot.service.PostsService;
 import com.block.project.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
+    public String index(Model model, @LoginUser User user){
 
         model.addAttribute("posts",postsService.findAllDesc());
 
