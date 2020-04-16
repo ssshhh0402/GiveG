@@ -4,24 +4,23 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 
-public enum CustomOAuth2Provider {
-
+public enum CustomOauth2Provider {
     KAKAO {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.POST, DEFAULT_LOGIN_REDIRECT_URL);
-            builder.scope("profile");
+                    ClientAuthenticationMethod.POST, DEFAULT_REDIRECT_URL);
+            //builder.scope("profile", "account_email", "gender","age_range","birthday");
             builder.authorizationUri("https://kauth.kakao.com/oauth/authorize");
             builder.tokenUri("https://kauth.kakao.com/oauth/token");
-            builder.userInfoUri("https://kapi.kakao.com/v1/user/me");
+            builder.userInfoUri("https://kapi.kakao.com/v2/user/me");
             builder.userNameAttributeName("id");
-            builder.clientName("Kakao");
+            builder.clientName("KAKAO");
             return builder;
         }
     };
 
-    private static final String DEFAULT_LOGIN_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}";
+    private static final String DEFAULT_REDIRECT_URL = "{baseUrl}/{action}/oauth2/code/{registrationId}";
 
     protected final ClientRegistration.Builder getBuilder(String registrationId,
                                                           ClientAuthenticationMethod method, String redirectUri) {
@@ -33,5 +32,4 @@ public enum CustomOAuth2Provider {
     }
 
     public abstract ClientRegistration.Builder getBuilder(String registrationId);
-
 }

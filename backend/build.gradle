@@ -1,6 +1,6 @@
 buildscript {
     ext{
-        springBootVersion = "2.1.9.RELEASE"
+        springBootVersion = "2.2.1.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -34,10 +34,9 @@ dependencies {
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')
 
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-mustache')
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.security:spring-security-oauth2-jose')
 
     testCompile('org.springframework.boot:spring-boot-starter-test:')
 }
