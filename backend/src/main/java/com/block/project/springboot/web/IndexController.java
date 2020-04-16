@@ -1,46 +1,46 @@
 package com.block.project.springboot.web;
 
-//import com.block.project.springboot.config.auth.LoginUser;
-//import com.block.project.springboot.config.auth.dto.SessionUser;
-import com.block.project.springboot.service.PostsService;
-import com.block.project.springboot.web.dto.PostsResponseDto;
-import lombok.RequiredArgsConstructor;
+import com.block.project.springboot.config.auth.CustomOauth2Provider;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-@RequiredArgsConstructor
 @Controller
 public class IndexController {
 
-    private final PostsService postsService;
-    private final HttpSession httpSession;
+    @GetMapping("/")
+    public String Home(OAuth2AuthenticationToken authentication,
+                       Model model,
+                       @RequestHeader Map<String,String> headers,
+                       @RequestParam Map<String,String> params,
+                       @RequestBody (required=false) String body){
 
-//    @GetMapping("/")
-//    public String index(Model model, @LoginUser SessionUser user){
-//
-//        model.addAttribute("posts",postsService.findAllDesc());
-//
-//        if(user != null){
-//            model.addAttribute("profileName", user.getName());
-//        }
-//        return "index";
-//    }
+        if( authentication != null ) {
 
-    @GetMapping("/posts/save")
-    public String postsSave(){
-        return "posts-save";
+            String registrationId = authentication.getAuthorizedClientRegistrationId().toUpperCase();
+
+            if(registrationId.equals(CustomOauth2Provider.KAKAO.name())){
+
+                LinkedHashMap<String, String > properties = authentication.getPrincipal().getAttribute("properties");
+                LinkedHashMap<String, String > kakaoAccount = authentication.getPrincipal().getAttribute("kakao_account");
+                model.addAttribute("name",properties.get("nickname"));
+                model.addAttribute("email",kakaoAccount.get("email"));
+                return "kakao";
+            }
+        }
+        return "index";
     }
 
-    @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model){
-
-        PostsResponseDto dto = postsService.findById(id);
-        model.addAttribute("post",dto);
-
-        return "posts-update";
+    @GetMapping("/callback")
+    public String callback(OAuth2AuthenticationToken authentication,
+                           Model model,
+                           @RequestHeader Map<String,String> headers,
+                           @RequestParam Map<String,String> params,
+                           @RequestBody (required=false) String body){
+        return "index";
     }
 }
