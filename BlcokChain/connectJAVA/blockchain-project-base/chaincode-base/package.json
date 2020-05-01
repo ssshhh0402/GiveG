@@ -1,0 +1,17 @@
+{
+    "name": "item_record_management.js",
+    "version": "1.0.0",
+    "description": "item history for happycola chaincode implemented in node.js",
+    "engines": {
+        "node": ">=8.4.0",
+        "npm": ">=5.3.0"
+    },
+    "scripts": {
+        "start": "node item_record_management.js"
+    },
+    "engine-strict": true,
+    "license": "Apache-2.0",
+    "dependencies": {
+        "fabric-shim": "~1.4.0"
+    }
+}

@@ -6,4 +6,7 @@
 /build/classes/java/main/
 /build/classes/java/test/
 
-application-oauth.yml
+
+fabric-ca.pem
+fabric-orderer.pem
+fabric-peer.pem
