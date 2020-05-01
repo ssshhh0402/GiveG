@@ -1,0 +1,29 @@
+@font-face { font-family: 'InkLipquid'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.ant-carousel .slick-slide {
+  text-align: center;
+  width: 80%;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: grey;
+}
+
+
+  #banner{
+    height: 300px;
+    /* height:650px;  */
+    text-align:center;
+    font-weight:bold;
+    background-image:linear-gradient(to right,blue,skyblue,green,greenYellow);  
+  }
+  
+.banner_title {
+  /* color:white; */
+  font-size:50px !important; 
+  font-family: 'InkLipquid'; 
+  
+  
+}
+  

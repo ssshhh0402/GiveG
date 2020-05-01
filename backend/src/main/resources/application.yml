@@ -1,14 +1,33 @@
 spring:
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-  session:
-    store-type: jdbc
-  h2:
-    console:
+        show_sql: false
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
       enabled: true
+      max-file-size: 200MB
+      max-request-size: 215MB
 
   profiles:
     include: oauth
+
+# Local(MySQL)
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/blockchain?serverTimezone=UTC&characterEncoding=UTF-8
+#    username: woojin
+#    password: woojin1
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://i02b202.p.ssafy.io:3306/test?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
+
+server:
+  port: 8081

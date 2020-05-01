@@ -1,14 +1,13 @@
 package com.block.project.springboot.domain.comment;
 
 import com.block.project.springboot.domain.BaseTimeEntity;
+import com.block.project.springboot.domain.posts.Posts;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -17,17 +16,22 @@ public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;
 
-    private Long postsId;
-
+    // User 이메일 입력하고 비교하자
+    @Column(nullable = false)
     private String author;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Posts posts;
+
     @Builder
-    public Comment(Long postsId, String author, String content){
-        this.postsId = postsId;
+    public Comment(Posts posts, String author, String content){
+        this.posts = posts;
         this.author = author;
         this.content = content;
     }

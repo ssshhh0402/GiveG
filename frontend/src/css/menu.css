@@ -1,0 +1,32 @@
+#menuContainer{
+    background:#F0F2F5;
+    text-align:center;
+    
+}
+.ant-tabs{
+    height:300px;
+}
+.ant-tabs .ant-tabs-bar{
+    width:15%;
+    
+}
+#menuContainer h1{
+    color:#9ADAD5;
+}
+
+.ant-tabs-tab{
+    color:#9ADAD5;
+}
+.ant-tabs-tab:hover{
+    color:#9ADAD5;
+}
+.ant-tabs-nav .ant-tabs-tab-active{
+    color:#9ADAD5;
+}
+.ant-tabs-nav .ant-tabs-tab-active:hover{
+    color:#9ADAD5;
+}
+::selection {
+    color: #fff;
+    background: #9ADAD5;
+}

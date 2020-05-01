@@ -17,13 +17,17 @@ export const LOG_IN_SUCCESS = createAction(LOG_SUCCESS);
 export const LOG_IN_FAILURE = createAction(LOG_FAILURE);
 export const LOG_IN_KAKAO = createAction(LOG_KAKAO);
 const initialState = {
-    isLogginIn: false,
+    isLoggedIn: false,
     logInErrorReason : '',
     email : '',
     password: '',
     access_token:'',
     refresh_token:'',
-    persistedState: {}
+    persistedState: {},
+    thumbnail : '',
+    nickname : '',
+    profile_image : '',
+    id : '',
     }
 
 
@@ -31,6 +35,8 @@ const initialState = {
 const reducer = (state = initialState, action) =>{
    switch (action.type){
        case REHYDRATE:
+           console.log('REHYDRATE')
+           console.log(action.payload)
            return {...state, persistedState: action.payload};
         case 'LOG_IN_REQUEST':{
             console.log('---------reducer 지나는중-------')
@@ -49,13 +55,23 @@ const reducer = (state = initialState, action) =>{
         case 'LOG_IN_KAKAO':{
             console.log('--------reducer kakao')
             console.log(action['payload'])
+            var thumb_url = ''
+            if (!action['payload']['thumbnail']){
+                thumb_url = 'https://w0.pngwave.com/png/491/2/kakaotalk-kakao-friends-instant-messaging-kakao-talk-png-clip-art-thumbnail.png'
+            } else{
+                thumb_url = action['payload']['profile_image']
+            }
             return{
                 isLoggedIn:true,
                 access_token: action['payload']['access_token'],
                 refresh_token: action['payload']['refresh_token'],
-                email:action['payload']['email']
+                email:action['payload']['email'],
+                nickname : action['payload']['nickname'],
+                profile_image: action['payload']['profile_image'],
+                thumbnail : thumb_url,
+                id : action['payload']['id']            
             }
-            }
+        }
         default: {
             console.log('-------reducer default')
             return state;
