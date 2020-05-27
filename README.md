@@ -30,8 +30,3 @@
 | :soccer: 정대윤            | BlockChain | Front-end , 팀장      |
 
 
-### Wiki
-
-[Commit Message](https://lab.ssafy.com/s02-blockchain-sub2/s02p22b202/wikis/home)
-
-
